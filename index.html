@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="App para optimizar cargas de peso perfectas">
+  <title>Carga Perfecta</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23000' width='192' height='192'/><text x='50%' y='50%' font-size='120' fill='%23fff' text-anchor='middle' dominant-baseline='central'>📦</text></svg>">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Carga Perfecta">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23000' width='192' height='192'/><text x='50%' y='50%' font-size='120' fill='%23fff' text-anchor='middle' dominant-baseline='central'>📦</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>📦 Carga Perfecta</h1>
+    <p class="subtitle">Encuentra la combinación perfecta de pesos</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Ingresa los pesos</h2>
+      <textarea id="nums" placeholder="Ejemplo: 3010,2478,2540,2876,2779,1804,2686,1446,2386,2714,2466,2878,3028">3010,2478,2540,2876,2779,1804,2686,1446,2386,2714,2466,2878,3028</textarea>
+      <small>Separa los valores con comas</small>
+    </div>
+
+    <div class="card">
+      <h2>Peso objetivo</h2>
+      <input type="number" id="target" value="25000" placeholder="Ingresa el peso objetivo">
+      <small>Total que deseas alcanzar</small>
+    </div>
+
+    <div class="card">
+      <h2>Opciones</h2>
+      <div class="options">
+        <label>
+          <span>Mínimo de items:</span>
+          <input type="number" id="minItems" value="8" min="1" max="20">
+        </label>
+        <label>
+          <span>Máximo de items:</span>
+          <input type="number" id="maxItems" value="14" min="1" max="20">
+        </label>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="solve()">🔍 CALCULAR</button>
+
+    <div id="res" class="result"></div>
+
+    <div class="actions">
+      <button class="btn-secondary" onclick="exportarCSV()" id="btnExportar" style="display:none;">📥 Descargar CSV</button>
+      <button class="btn-secondary" onclick="limpiar()">🗑️ Limpiar</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>v1.0 | PWA - Funciona offline</p>
+  </footer>
+</div>
+
+<script src="app.js"></script>
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    console.log('Service Worker registrado ✅');
+  }).catch(err => {
+    console.log('Error registrando Service Worker:', err);
+  });
+}
+</script>
+
+</body>
+</html>
